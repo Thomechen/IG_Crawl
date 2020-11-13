@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import re
-def ig_crawl():
+
 #套件輸入
 url = 'https://www.instagram.com/?hl=zh-tw'
 
