@@ -7,17 +7,19 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import re
+import os
 
 #套件輸入
 url = 'https://www.instagram.com/?hl=zh-tw'
+path = './'
 
-browser = webdriver.Edge('F:\Python\Web__Crawler\msedgedriver.exe')
+browser = webdriver.Edge('.\msedgedriver.exe')
 browser.implicitly_wait(10)
 browser.get(url)
 
 #開起網頁
-username = 'dino55111@yahoo.com.tw'
-password = 'test123456789'
+username = 'austin6614@yahoo.com'
+password = 'tp6w/6cj/6'
 
 search_title_list = []
 search_title_link_list = []
@@ -50,12 +52,13 @@ for t,t_1 in zip(search_title,search_title_link):
 for i in range(len(search_title_list)):
     print(str(i)+':'+str(search_title_list[i]))
 print(' ')
-search = input('Enter the No.:')
-browser.get(search_title_link_list[int(search)])
+search_no = input('Enter the No.:')
+os.mkdir(path+search)
+browser.get(search_title_link_list[int(search_no)])
 soup = BeautifulSoup(browser.page_source,'html.parser')
 img = soup.select('img.FFVAD')
 for g in img:
     img_list.append(g.get('src'))
 for i in range(len(img_list)):
-    urllib.request.urlretrieve(img_list[i], './pic/'+str(i) +'.jpg')
+    urllib.request.urlretrieve(img_list[i], './'+search+'/'+str(i) +'.jpg')
 browser.quit
