@@ -7,23 +7,18 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import re
 import os
-
 #套件輸入
 url = 'https://www.instagram.com/?hl=zh-tw'
-
 browser = webdriver.Chrome('.\chromedriver.exe')
 browser.implicitly_wait(10)
 browser.get(url)
-
 #開起網頁
 username = 'austin6614@yahoo.com'
 password = 'tp6w/6cj/6'
-
 element = browser.find_element_by_name('username')
-element.send_keys(username)
+element.send_keys(username) #帳號輸入
 element = browser.find_element_by_name('password')
-element.send_keys(password)
-
+element.send_keys(password) #密碼輸入
 submit = browser.find_element_by_class_name('sqdOP.L3NKy.y3zKF').click()
 locator = (By.CLASS_NAME,'cmbtv')
 WebDriverWait(browser,5).until(EC.presence_of_element_located(locator))#等待網頁網取
@@ -31,36 +26,31 @@ submit = browser.find_element_by_class_name('sqdOP.yWX7d.y3zKF').click()
 locator = (By.CLASS_NAME,'mt3GC')
 WebDriverWait(browser,5).until(EC.presence_of_element_located(locator))#等待網頁網取
 submit = browser.find_element_by_class_name('aOOlW.HoLwm').click()
-
-
-main = ['0.search','1.close']
-
+main = ['0.search','1.close']#功能列表
 search_title_list = []
 search_title_link_list = []
 img_list = []
-
-
 while True:
     for i in range(len(main)):
         print(main[i])
     fun = input('Enter your function:')
     if int(fun) == 0:
-        search = input('Enter the keyword:')
-        path = './'
+        search = input('Enter the keyword:')#輸入關鍵字搜尋
+        path = 'C:/Users/islan/Desktop/'
         element = browser.find_element_by_class_name('XTCLo.x3qfX')
         element.send_keys(search)
         locator = (By.CLASS_NAME,'fuqBx')
         WebDriverWait(browser,5).until(EC.presence_of_element_located(locator))#等待網頁網取
         soup = BeautifulSoup(browser.page_source,'html.parser')
-        search_title = soup.select('span.Fy4o8')
+        search_title = soup.find_all('span',class_='Fy4o8' or 'Ap253')
         search_title_link = soup.select('a.yCE8d')
         for t,t_1 in zip(search_title,search_title_link):
             search_title_list.append(t.text)
             search_title_link_list.append('https://www.instagram.com'+t_1.get('href'))
         for i in range(len(search_title_list)):
-            print(str(i)+':'+str(search_title_list[i]))
+            print(str(i)+':'+str(search_title_list[i]))#列出所有相關項目
             print(' ')
-        search_no = input('Enter the No.:')
+        search_no = input('Enter the No.:')#選擇相關項目
         print('')
         os.mkdir(path+search)
         browser.get(search_title_link_list[int(search_no)])
@@ -69,11 +59,10 @@ while True:
         for g in img:
             img_list.append(g.get('src'))
         for i in range(len(img_list)):
-            urllib.request.urlretrieve(img_list[i], './'+search+'/'+str(i) +'.jpg')
-            
+            urllib.request.urlretrieve(img_list[i], 'C:/Users/islan/Desktop/'+search+'/'+str(i) +'.jpg')            
         submit = browser.find_element_by_class_name('Igw0E.rBNOH.eGOV_.ybXk5._4EzTm').click()
     elif int(fun) == 1:
-        browser.close()
+        browser.quit()
         break
     
     
