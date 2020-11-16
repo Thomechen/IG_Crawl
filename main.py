@@ -61,4 +61,7 @@ for g in img:
     img_list.append(g.get('src'))
 for i in range(len(img_list)):
     urllib.request.urlretrieve(img_list[i], './'+search+'/'+str(i) +'.jpg')
+    
+submit = browser.find_element_by_class_name('Igw0E.rBNOH.eGOV_.ybXk5._4EzTm').click()
+
 browser.quit
