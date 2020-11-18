@@ -42,7 +42,7 @@ while True:
         locator = (By.CLASS_NAME,'fuqBx')
         WebDriverWait(browser,5).until(EC.presence_of_element_located(locator))#等待網頁網取
         soup = BeautifulSoup(browser.page_source,'html.parser')
-        search_title = soup.find_all('span',class_='Fy4o8' or 'Ap253')
+        search_title = soup.select('span.Fy4o8')
         search_title_link = soup.select('a.yCE8d')
         for t,t_1 in zip(search_title,search_title_link):
             search_title_list.append(t.text)
