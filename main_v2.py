@@ -13,8 +13,8 @@ browser = webdriver.Chrome('.\chromedriver.exe')
 browser.implicitly_wait(10)
 browser.get(url)
 #開起網頁
-username = 'austin6614@yahoo.com'
-password = 'tp6w/6cj/6'
+username = '*********@yahoo.com'
+password = '********'
 element = browser.find_element_by_name('username')
 element.send_keys(username) #帳號輸入
 element = browser.find_element_by_name('password')
